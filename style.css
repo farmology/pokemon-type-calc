@@ -31,3 +31,7 @@
   grid-area: not-effective;
   background-color: cornflowerblue;
 }
+
+#searchbtn {
+    color: brown;
+}
