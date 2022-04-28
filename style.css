@@ -5,7 +5,7 @@
 .container {
   display: grid;
   height: 100vh;
-
+  
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 0px 0px;
@@ -18,10 +18,12 @@
   padding: 2rem;
   grid-area: search;
   background-color: bisque;
+  text-align: center;
 }
 .pokedisplay {
   grid-area: pokedisplay;
   background-color: aquamarine;
+  text-align: center;
 }
 .supereffective {
   grid-area: supereffective;
