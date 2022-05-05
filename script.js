@@ -31,7 +31,7 @@ function createTypeList() {
   let anone = document.createElement("div");
   anone.id = "anone";
   let dquadruple = document.createElement("div");
-  dquadruple.id = 'dquadruple';
+  dquadruple.id = "dquadruple";
   let ddouble = document.createElement("div");
   ddouble.id = "ddouble";
   let dhalf = document.createElement("div");
@@ -95,6 +95,19 @@ async function getFetch() {
     attacking.innerText = "";
     defending.innerText = "";
     createTypeList();
+    let adoublestring = typejson1.damage_relations.double_damage_to
+      .map((type) => type.name)
+      .join(" ");
+    adouble.innerText = `Double Damage to \n ${adoublestring}`;
+    let ahalfstring = typejson1.damage_relations.half_damage_to
+      .map((type) => type.name)
+      .join(" ");
+    ahalf.innerText = `Half Damage to \n ${ahalfstring}`;
+    let anonestring = typejson1.damage_relations.no_damage_to
+      .map((type) => type.name)
+      .join(" ");
+    anone.innerText = `No Damage to \n ${anonestring}`;
+    
     const darray1 = typejson1.damage_relations.double_damage_from.map(
       (type) => type.name
     );
@@ -103,7 +116,10 @@ async function getFetch() {
     );
     const fourxarray = darray1.filter((type) => darray2.includes(type));
     let fourxstring = fourxarray.join(" ");
-    dquadruple.innerText = `Quadruple Damage from \n ${fourxstring}`;
+    if (fourxstring != "") {
+      dquadruple.innerText = `Quadruple Damage from \n ${fourxstring}`;
+    }
+
     const harray1 = typejson1.damage_relations.half_damage_from.map(
       (type) => type.name
     );
@@ -118,7 +134,10 @@ async function getFetch() {
     );
     const quarterxarray = harray1.filter((type) => harray2.includes(type));
     let quarterxstring = quarterxarray.join(" ");
-    dquarter.innerText = `Quarter Damage from \n ${quarterxstring}`;
+    if (quarterxstring != "") {
+      dquarter.innerText = `Quarter Damage from \n ${quarterxstring}`;
+    }
+
     const halfxarray1 = harray1
       .filter((type) => !harray2.includes(type))
       .concat(harray2.filter((type) => !harray1.includes(type)));
@@ -127,18 +146,29 @@ async function getFetch() {
       .concat(darray2.filter((type) => !darray1.includes(type)));
     console.log(halfxarray1);
     console.log(doublexarray1);
-    const halfxarray2 = halfxarray1
-        .filter((type) => !doublexarray1.includes(type));
-    const doublexarray2 = doublexarray1
-        .filter((type) => !halfxarray1.includes(type));
-    
-            
-    console.log(halfxarray2);
-    let halfxstring = halfxarray2.join(' ');
-    dhalf.innerText = `Half Damage from \n ${halfxstring}`;
-    let doublexstring = doublexarray2.join(' ');
-    ddouble.innerText = `Double Damage from \n ${doublexstring}`;
+    const halfxarray2 = halfxarray1.filter(
+      (type) => !doublexarray1.includes(type)
+    );
+    const doublexarray2 = doublexarray1.filter(
+      (type) => !halfxarray1.includes(type)
+    );
 
+    console.log(halfxarray2);
+    let halfxstring = halfxarray2.join(" ");
+    if (halfxstring != "") {
+      dhalf.innerText = `Half Damage from \n ${halfxstring}`;
+    }
+
+    let doublexstring = doublexarray2.join(" ");
+    if (doublexstring != "") {
+      ddouble.innerText = `Double Damage from \n ${doublexstring}`;
+    }
+
+    const zeroarray = narray1.concat(narray2);
+    let zerostring = zeroarray.join(" ");
+    if (zerostring != "") {
+      dnone.innerText = `Immune to \n ${zerostring}`;
+    }
   }
 
   console.log(json.sprites.front_default);
@@ -147,8 +177,3 @@ async function getFetch() {
   img.src = json.sprites.front_default;
   document.getElementById("pokepic").appendChild(img);
 }
-
-// json.types.forEach(element => {
-//     console.log(element.type.name);
-//     poketype.innerText += element.type.name;
-// });
