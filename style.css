@@ -25,11 +25,11 @@
   background-color: aquamarine;
   text-align: center;
 }
-.supereffective {
+.attacking {
   grid-area: supereffective;
   background-color: coral;
 }
-.noteffective {
+.defending {
   grid-area: not-effective;
   background-color: cornflowerblue;
 }
