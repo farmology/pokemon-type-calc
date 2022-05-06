@@ -88,7 +88,9 @@ async function getFetch() {
     let anonestring = typejson1.damage_relations.no_damage_to
       .map((type) => type.name)
       .join(" ");
-    anone.innerText = `No Damage to \n ${anonestring}`;
+    if (anonestring != '') {
+      anone.innerText = `No Damage to \n ${anonestring}`;
+    };
     let ddoublestring = typejson1.damage_relations.double_damage_from
       .map((type) => type.name)
       .join(" ");
@@ -100,7 +102,9 @@ async function getFetch() {
     let dnonestring = typejson1.damage_relations.no_damage_from
       .map((type) => type.name)
       .join(" ");
-    dnone.innerText = `No Damage from \n ${dnonestring}`;
+    if (dnonestring != '') {
+    dnone.innerText = `Immune to \n ${dnonestring}`;
+  };
   } else {
     let typeurl2 = await fetch(json.types[1].type.url);
     let typejson2 = await typeurl2.json();
@@ -122,7 +126,9 @@ async function getFetch() {
     let anonestring = typejson1.damage_relations.no_damage_to
       .map((type) => type.name)
       .join(" ");
+    if (anonestring != '') {
     anone.innerText = `No Damage to \n ${anonestring}`;
+    };
     let adoublestring2 = typejson2.damage_relations.double_damage_to
       .map((type) => type.name)
       .join(" ");
@@ -134,8 +140,9 @@ async function getFetch() {
     let anonestring2 = typejson2.damage_relations.no_damage_to
       .map((type) => type.name)
       .join(" ");
+    if (anonestring2 != '') {
     anone2.innerText = `No Damage to \n ${anonestring2}`;
-    
+    };
     const darray1 = typejson1.damage_relations.double_damage_from.map(
       (type) => type.name
     );
