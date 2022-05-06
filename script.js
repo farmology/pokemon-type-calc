@@ -61,6 +61,8 @@ async function getFetch() {
   poketype.innerText = "";
   if (json.types.length === 1) {
     poketype.innerText = json.types[0].type.name;
+    attacking.innerText = 'Attacking';
+    defending.innerText = 'Defending';
     createTypeList();
     let adoublestring = typejson1.damage_relations.double_damage_to
       .map((type) => type.name)
@@ -92,8 +94,8 @@ async function getFetch() {
     poketype.innerText = `${json.types[0].type.name} & ${json.types[1].type.name}`;
     console.log(typejson1.damage_relations);
     console.log(typejson2.damage_relations);
-    attacking.innerText = "";
-    defending.innerText = "";
+    attacking.innerText = 'Attacking';
+    defending.innerText = 'Defending';
     createTypeList();
     let adoublestring = typejson1.damage_relations.double_damage_to
       .map((type) => type.name)
