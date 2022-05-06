@@ -27,8 +27,24 @@
 }
 .attacking {
   grid-area: supereffective;
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "type1 type2"; 
+  
+}
+
+.type1 { 
+  grid-area: type1; 
   background-color: coral;
 }
+.type2 { 
+  grid-area: type2; 
+  background-color: crimson;
+}
+
 .defending {
   grid-area: not-effective;
   background-color: cornflowerblue;

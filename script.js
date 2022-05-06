@@ -2,6 +2,9 @@ const searchbutton = document.getElementById("searchbtn");
 const poketype = document.getElementById("poketype");
 const pokepic = document.getElementById("pokepic");
 const attacking = document.getElementById("attacking");
+
+const type1 = document.getElementById('type1');
+const type2 = document.getElementById('type2');
 const defending = document.getElementById("defending");
 
 searchbutton.addEventListener("click", function (event) {
@@ -30,6 +33,12 @@ function createTypeList() {
   ahalf.id = "ahalf";
   let anone = document.createElement("div");
   anone.id = "anone";
+  let adouble2 = document.createElement("div");
+  adouble2.id = "adouble2";
+  let ahalf2 = document.createElement("div");
+  ahalf2.id = "ahalf2";
+  let anone2 = document.createElement("div");
+  anone2.id = "anone2";
   let dquadruple = document.createElement("div");
   dquadruple.id = "dquadruple";
   let ddouble = document.createElement("div");
@@ -40,9 +49,12 @@ function createTypeList() {
   dquarter.id = "dquarter";
   let dnone = document.createElement("div");
   dnone.id = "dnone";
-  attacking.appendChild(adouble);
-  attacking.appendChild(ahalf);
-  attacking.appendChild(anone);
+  type1.appendChild(adouble);
+  type1.appendChild(ahalf);
+  type1.appendChild(anone);
+  type2.appendChild(adouble2);
+  type2.appendChild(ahalf2);
+  type2.appendChild(anone2);
   defending.appendChild(dquadruple);
   defending.appendChild(ddouble);
   defending.appendChild(dhalf);
@@ -61,7 +73,8 @@ async function getFetch() {
   poketype.innerText = "";
   if (json.types.length === 1) {
     poketype.innerText = json.types[0].type.name;
-    attacking.innerText = 'Attacking';
+    type1.innerText = `Attacking with ${json.types[0].type.name}`;
+    type2.innerText = '';
     defending.innerText = 'Defending';
     createTypeList();
     let adoublestring = typejson1.damage_relations.double_damage_to
@@ -94,7 +107,8 @@ async function getFetch() {
     poketype.innerText = `${json.types[0].type.name} & ${json.types[1].type.name}`;
     console.log(typejson1.damage_relations);
     console.log(typejson2.damage_relations);
-    attacking.innerText = 'Attacking';
+    type1.innerText = `Attacking with ${json.types[0].type.name}`;
+    type2.innerText = `Attacking with ${json.types[1].type.name}`;
     defending.innerText = 'Defending';
     createTypeList();
     let adoublestring = typejson1.damage_relations.double_damage_to
@@ -109,6 +123,18 @@ async function getFetch() {
       .map((type) => type.name)
       .join(" ");
     anone.innerText = `No Damage to \n ${anonestring}`;
+    let adoublestring2 = typejson2.damage_relations.double_damage_to
+      .map((type) => type.name)
+      .join(" ");
+    adouble2.innerText = `Double Damage to \n ${adoublestring2}`;
+    let ahalfstring2 = typejson2.damage_relations.half_damage_to
+      .map((type) => type.name)
+      .join(" ");
+    ahalf2.innerText = `Half Damage to \n ${ahalfstring2}`;
+    let anonestring2 = typejson2.damage_relations.no_damage_to
+      .map((type) => type.name)
+      .join(" ");
+    anone2.innerText = `No Damage to \n ${anonestring2}`;
     
     const darray1 = typejson1.damage_relations.double_damage_from.map(
       (type) => type.name
